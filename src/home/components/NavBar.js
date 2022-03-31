@@ -30,7 +30,6 @@ function NavBar() {
       <Button text="Log In" onClick={() => setLogin(true)} />
       {login && <Login callback={(e) => {
         setLogin(false);
-        console.log(login);
         if (e.err) {
           loginAnon(setLogin);
         }
