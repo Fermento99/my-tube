@@ -3,9 +3,10 @@ import styled from 'styled-components';
 
 const Btn = styled.button`
   padding: .7em 1.5em;
-  margin: .2em;
+  margin: .6em;
   height: auto;
-  background-color: #b9a44c;
+  background-color: #0A2463;
+  color: white;
   border: solid 2px;
   border-radius: 8px;
 `;

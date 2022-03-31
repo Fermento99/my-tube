@@ -9,8 +9,8 @@ const Window = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #eee;
-  background-color: rgba(239, 239, 239, 0.7);
+  background-color: #FDFCFF;
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 20;
 `;
 

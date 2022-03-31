@@ -6,11 +6,14 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   width: max-content;
-  margin: .4em 2em;
+  background-color: #FDFCFF;
+  overflow-x: visible;
 `;
 
 const ScrollBox = styled.div`
   overflow-x: scroll;
+  scrollbar-width: thin;
+  margin: -.5em 2em 4em 2em;
 `;
 
 const Title = styled.h2`

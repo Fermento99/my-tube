@@ -3,12 +3,16 @@ import styled from 'styled-components';
 import Video from './Video';
 
 const Tile = styled.div`
-  width: 25em;
-  height: 20em;
-  border: solid 2px #ccc;
-  background-color: #ddd;
+  font-family: sans-serif;
+  width: 24em;
+  height: 17em;
+  border: solid 2px #8D818C;
+  background-color: #ECEAEC;
   padding: .3em;
-  margin: .5em;
+  margin: 1em;
+  text-align: center;
+  font-weight: bolder ;
+  border-radius: 4px;
 
   > img {
     width: 100%;
@@ -32,7 +36,7 @@ const Tile = styled.div`
     align-items: center;
     z-index: 5;
     opacity: 0;
-    background-color: #aaa ;
+    background-color: #fff ;
     transition: opacity .3s ease-out;
   }
 
