@@ -19,14 +19,15 @@ const getAnonToken = (setter) => {
     })
   }).then(res => res.json())
     .then(data => {
-      setLocalStorageItem(Keys['USERNAME'], data.User);
-      setLocalStorageItem(Keys['API_KEY'], data.AuthorizationToken);
+      setLocalStorageItem(Keys['USER'], data.User);
+      setLocalStorageItem(Keys['API_TOKEN'], data.AuthorizationToken);
       setter({ token: data.AuthorizationToken, user: data.User });
     });
 };
 
 const getMedia = (setter, token) => {
-  fetch('https://thebetter.bsgroup.eu/Media/GetMediaList', {
+  console.log('getMedia')
+  const fetch1 = fetch('https://thebetter.bsgroup.eu/Media/GetMediaList', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -41,9 +42,40 @@ const getMedia = (setter, token) => {
       "PageSize": 15
     })
   }).then(res => res.json())
-    .then(data => {
-      setter(data);
-    });
+
+  const fetch2 = fetch('https://thebetter.bsgroup.eu/Media/GetMediaList', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      "MediaListId": 3,
+      "IncludeCategories": false,
+      "IncludeImages": true,
+      "IncludeMedia": false,
+      "PageNumber": 1,
+      "PageSize": 15
+    })
+  }).then(res => res.json())
+
+  const fetch3 = fetch('https://thebetter.bsgroup.eu/Media/GetMediaList', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      "MediaListId": 3,
+      "IncludeCategories": false,
+      "IncludeImages": true,
+      "IncludeMedia": false,
+      "PageNumber": 1,
+      "PageSize": 15
+    })
+  }).then(res => res.json())
+  
+  Promise.all([fetch1, fetch2, fetch3]).then((data) => setter(data)).catch(err => console.log(err))
 };
 
 function App() {
@@ -59,11 +91,11 @@ function App() {
     getMedia(setMedia, data.token.Token);
     return (<Splash disapear={false} />);
   }
-  console.log(data)
+  console.log(data);
   return (<>
     <Splash disapear={true} />
     <Home user={data.user} media={media} />
-  </>)
+  </>);
 }
 
 export default App;

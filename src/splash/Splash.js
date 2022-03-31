@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const Curtain = styled.div`
-  position: fixed;
+  position: ${props => props.fullscreen ? 'fixed' : 'absolute'};
   top: 0;
+  left: 0;
   z-index: 1000;
   width: 100%;
   height: 100%;
@@ -23,7 +24,7 @@ const Title = styled.h1`
 
 
 
-function Splash({ disapear }) {
+function Splash({ disapear, fullscreen=true }) {
   const [display, setDisplay] = useState(true);
   const [opacity, setOpacity] = useState(1);
 
@@ -33,7 +34,7 @@ function Splash({ disapear }) {
   }
 
   return (
-    <Curtain display={display ? 1 : 0} opacity={opacity} >
+    <Curtain display={display ? 1 : 0} opacity={opacity} fullscreen={fullscreen ? 1 : 0}>
       <Title>MyTube</Title>
     </Curtain>
   );

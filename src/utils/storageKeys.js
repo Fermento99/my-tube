@@ -1,5 +1,5 @@
 
 export default class Keys {
-  static USERNAME = 'MT_USER'
-  static API_token = 'MT_API_token'
+  static USER = 'MT_USER'
+  static API_TOKEN = 'MT_API_TOKEN'
 }
