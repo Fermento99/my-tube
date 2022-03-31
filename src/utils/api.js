@@ -26,7 +26,7 @@ const login = (username, password, callback) => {
     setLocalStorageItem(Keys['USER'], data.User);
     setLocalStorageItem(Keys['API_TOKEN'], data.AuthorizationToken);
     callback({ token: data.AuthorizationToken, user: data.User });
-  }).catch(err => err.then(callback({err: true, data: err})));
+  }).catch(err => err.then(callback({ err: true, data: err })));
 };
 
 /**
@@ -79,58 +79,36 @@ const watch = async (media, callback) => {
 };
 
 /**
+ * Helper function used to fetch media lists
+ */
+const fetchMediaList = (id, token) => {
+  return fetch('https://thebetter.bsgroup.eu/Media/GetMediaList', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      "MediaListId": id,
+      "IncludeCategories": false,
+      "IncludeImages": true,
+      "IncludeMedia": false,
+      "PageNumber": 1,
+      "PageSize": 15
+    })
+  }).then(res => res.json());
+};
+
+/**
  * Function returns videos for media lists
  */
 const getMedia = (setter, token) => {
-  const fetch1 = fetch('https://thebetter.bsgroup.eu/Media/GetMediaList', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    },
-    body: JSON.stringify({
-      "MediaListId": 2,
-      "IncludeCategories": false,
-      "IncludeImages": true,
-      "IncludeMedia": false,
-      "PageNumber": 1,
-      "PageSize": 15
-    })
-  }).then(res => res.json())
 
-  const fetch2 = fetch('https://thebetter.bsgroup.eu/Media/GetMediaList', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    },
-    body: JSON.stringify({
-      "MediaListId": 3,
-      "IncludeCategories": false,
-      "IncludeImages": true,
-      "IncludeMedia": false,
-      "PageNumber": 1,
-      "PageSize": 15
-    })
-  }).then(res => res.json())
-
-  const fetch3 = fetch('https://thebetter.bsgroup.eu/Media/GetMediaList', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    },
-    body: JSON.stringify({
-      "MediaListId": 3,
-      "IncludeCategories": false,
-      "IncludeImages": true,
-      "IncludeMedia": false,
-      "PageNumber": 1,
-      "PageSize": 15
-    })
-  }).then(res => res.json())
-  
-  Promise.all([fetch1, fetch2, fetch3]).then((data) => setter(data)).catch(err => console.log(err))
+  Promise.all([
+    fetchMediaList(2, token),
+    fetchMediaList(2, token),
+    fetchMediaList(2, token)
+  ]).then((data) => setter(data)).catch(err => console.log(err));
 };
 
 export { login, watch, loginAnon, getMedia };
