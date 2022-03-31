@@ -34,7 +34,7 @@ function Splash({ disapear, fullscreen=true }) {
   }
 
   return (
-    <Curtain display={display ? 1 : 0} opacity={opacity} fullscreen={fullscreen ? 1 : 0}>
+    <Curtain display={display ? 1 : 0} opacity={opacity} fullscreen={fullscreen ? 1 : 0} onClick={e => e.stopPropagation()}>
       <Title>MyTube</Title>
     </Curtain>
   );

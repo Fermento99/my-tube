@@ -3,7 +3,7 @@ import Dialog from '../../../cmponents/Dialog';
 import Error from '../../../cmponents/Error';
 import Sheet from '../../../cmponents/Sheet';
 import Splash from '../../../splash/Splash';
-import { watch } from '../../../utils/utils';
+import { watch } from '../../../utils/api';
 
 
 
@@ -21,7 +21,6 @@ function Video({ media, closing }) {
     );
   }
 
-  console.log(loaded);
   if (loaded.err) { 
     return (<Dialog closing={closing}>
       <Sheet>

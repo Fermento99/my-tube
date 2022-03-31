@@ -19,8 +19,6 @@ const Title = styled.h2`
 `
 
 function MediaList({ media, title }) {
-  console.log(media.Entities);
-
   return (<div>
     <Title>{title}</Title>
     <ScrollBox>

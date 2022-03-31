@@ -2,31 +2,9 @@ import { useState } from 'react';
 import './App.css';
 import Home from './home/Home';
 import Splash from './splash/Splash';
-import Keys from './utils/storageKeys';
-import { setLocalStorageItem, getUUID } from './utils/utils';
-
-const getAnonToken = (setter) => {
-  fetch('https://thebetter.bsgroup.eu/Authorization/SignIn', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      "Device": {
-        "PlatformCode": "WEB",
-        "Name": getUUID(),
-      }
-    })
-  }).then(res => res.json())
-    .then(data => {
-      setLocalStorageItem(Keys['USER'], data.User);
-      setLocalStorageItem(Keys['API_TOKEN'], data.AuthorizationToken);
-      setter({ token: data.AuthorizationToken, user: data.User });
-    });
-};
+import { loginAnon } from './utils/api';
 
 const getMedia = (setter, token) => {
-  console.log('getMedia')
   const fetch1 = fetch('https://thebetter.bsgroup.eu/Media/GetMediaList', {
     method: 'POST',
     headers: {
@@ -83,7 +61,7 @@ function App() {
   const [media, setMedia] = useState(null);
 
   if (!data) {
-    getAnonToken(setData);
+    loginAnon(setData);
     return (<Splash disapear={false} />);
   }
 
@@ -91,7 +69,7 @@ function App() {
     getMedia(setMedia, data.token.Token);
     return (<Splash disapear={false} />);
   }
-  console.log(data);
+
   return (<>
     <Splash disapear={true} />
     <Home user={data.user} media={media} />

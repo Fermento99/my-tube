@@ -10,7 +10,6 @@ const Container = styled.div`
 `;
 
 function Home({ user, media }) {
-  console.log(media)
   return (<Container>
     <NavBar user={user} />
     <MediaList media={media[0]} title='Media List 1' />

@@ -10,9 +10,9 @@ const Btn = styled.button`
   border-radius: 8px;
 `;
 
-function Button({ text }) {
+function Button({ text, onClick }) {
   return (
-    <Btn>{text}</Btn>
+    <Btn onClick={onClick}>{text}</Btn>
   );
 }
 

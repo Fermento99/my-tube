@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../cmponents/Button';
+import Login from '../../login/Login';
+import { loginAnon } from '../../utils/api';
+import Keys from '../../utils/storageKeys';
+import { getLocalStorageItem } from '../../utils/utils';
 
 const Nav = styled.nav`
   position: fixed;
@@ -14,13 +18,23 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   z-index: 10;
-`
+`;
 
-function NavBar({ user }) {
+function NavBar() {
+  const [login, setLogin] = useState(false);
+  const user = getLocalStorageItem(Keys['USER']);
+
   return (
     <Nav>
-      <h3>Logged in as <em>{user.UserName}</em></h3>
-      <Button text="Log In" />
+      <h3>Logged in as <em>{user.UserName || user.FullName}</em></h3>
+      <Button text="Log In" onClick={() => setLogin(true)} />
+      {login && <Login callback={(e) => {
+        setLogin(false);
+        console.log(login);
+        if (e.err) {
+          loginAnon(setLogin);
+        }
+      }} />}
     </Nav>
   );
 }
