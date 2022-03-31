@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Dialog from '../../../cmponents/Dialog';
-import Error from '../../../cmponents/Error';
-import Sheet from '../../../cmponents/Sheet';
+import Dialog from '../../../components/Dialog';
+import Error from '../../../components/Error';
+import Sheet from '../../../components/Sheet';
 import Splash from '../../../splash/Splash';
 import { watch } from '../../../utils/api';
 

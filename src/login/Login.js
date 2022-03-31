@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import styled from 'styled-components';
-import Button from '../cmponents/Button';
-import Dialog from '../cmponents/Dialog';
-import Sheet from '../cmponents/Sheet';
+import Button from '../components/Button';
+import Dialog from '../components/Dialog';
+import Sheet from '../components/Sheet';
 import { login } from '../utils/api';
 
 const Input = styled.input`
